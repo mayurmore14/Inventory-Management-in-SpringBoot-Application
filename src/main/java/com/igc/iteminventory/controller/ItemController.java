@@ -1,6 +1,9 @@
 package com.igc.iteminventory.controller;
 
 import com.igc.iteminventory.entity.ItemEntity;
+import com.igc.iteminventory.service.IItemService;
+import com.igc.iteminventory.service.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,7 +12,8 @@ import java.util.ArrayList;
 @RequestMapping("/invapi")
 public class ItemController {
 
-    ArrayList<ItemEntity> itemEntityList = new ArrayList<>();
+    @Autowired
+    IItemService itemService;
 
     @GetMapping("/home")
     public String homePage() {
@@ -18,25 +22,16 @@ public class ItemController {
 
     @PostMapping("/additem")
     public ItemEntity addItem(@RequestBody ItemEntity itemEntity) {
-        itemEntityList.add(itemEntity);
-        return itemEntity;
+        return itemService.addItem(itemEntity);
     }
 
     @GetMapping("/getitem")
     public ItemEntity getItem() {
-        ItemEntity itemEntity = new ItemEntity();
-        itemEntity.setid(1);
-        itemEntity.setname("Pen");
-        itemEntity.setdescription("Ball Pen");
-        itemEntity.setprice(30);
-        itemEntity.setquantity(50);
-        itemEntity.setstatus("Available");
-        return itemEntity;
+        return itemService.getItem();
 
     }
         @GetMapping("/getallitems")
         public ArrayList<ItemEntity> getAllItems() {
-        
-            return itemEntityList;
+            return itemService.getAllItems();
     }
 }
