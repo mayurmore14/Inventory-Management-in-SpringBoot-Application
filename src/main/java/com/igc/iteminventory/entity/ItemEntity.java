@@ -1,6 +1,12 @@
 package com.igc.iteminventory.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class ItemEntity {
+
+    @Id
     private int id;
     private String name;
     private String description;
@@ -44,7 +50,7 @@ public class ItemEntity {
         this.price = price;
     }
 
-    public String getStatus(String status) {
+    public String getStatus() {
         return status;
     }
     public void setstatus(String status) {
