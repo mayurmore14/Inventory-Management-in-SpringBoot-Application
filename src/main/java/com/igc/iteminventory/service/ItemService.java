@@ -1,13 +1,14 @@
 package com.igc.iteminventory.service;
 
 import com.igc.iteminventory.entity.ItemEntity;
+import com.igc.iteminventory.exception.ItemNotFoundException;
 import com.igc.iteminventory.repo.IItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService implements IItemService {
@@ -26,20 +27,26 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public ItemEntity getItemById(int id) {
-        return itemRepo.findById(id).get();
+    public Optional<ItemEntity> getItemById(int id) {
+        Optional<ItemEntity> itemEntity = itemRepo.findById(id);
+        if(itemEntity.isPresent()) {
+            return itemEntity;
+        } else {
+            throw new ItemNotFoundException("Item With Given Id Not Found in Database ");
+        }
+
     }
 
     @Override
     public String deleteItemById(int id) {
-        ItemEntity item = getItemById(id);
+        ItemEntity item = itemRepo.findById(id).get();
         itemRepo.delete(item);
         return "Item Deleted Successfully";
     }
 
     @Override
     public ItemEntity updateItemById(int id, ItemEntity item) {
-        ItemEntity oldItem = getItemById(id);
+        ItemEntity oldItem = itemRepo.findById(id).get();
 
         oldItem.setname(item.getname());
         oldItem.setdescription(item.getdescription());

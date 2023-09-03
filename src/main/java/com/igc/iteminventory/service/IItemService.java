@@ -2,8 +2,8 @@ package com.igc.iteminventory.service;
 
 import com.igc.iteminventory.entity.ItemEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface IItemService {
 
@@ -11,7 +11,7 @@ public interface IItemService {
 
     public List<ItemEntity> getAllItems();
 
-    public ItemEntity getItemById(int id);
+    public Optional<ItemEntity> getItemById(int id);
 
     public String deleteItemById(int id);
 
