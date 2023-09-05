@@ -2,13 +2,16 @@ package com.igc.iteminventory.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class ItemEntity {
 
     @Id
     private int id;
+    @NotBlank(message = "Please Enter Item Name")
     private String name;
+    @NotBlank(message = "Please Enter the Description")
     private String description;
     private int quantity;
     private int price;

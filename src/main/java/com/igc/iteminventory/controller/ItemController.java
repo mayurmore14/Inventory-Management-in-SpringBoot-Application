@@ -3,6 +3,7 @@ package com.igc.iteminventory.controller;
 import com.igc.iteminventory.entity.ItemEntity;
 import com.igc.iteminventory.responses.Responses;
 import com.igc.iteminventory.service.IItemService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ItemController {
     }
 
     @PostMapping("/additem")
-    public ResponseEntity<?> addItem(@RequestBody ItemEntity itemEntity) {
+    public ResponseEntity<?> addItem(@RequestBody @Valid ItemEntity itemEntity) {
         return new ResponseEntity<>(new Responses("Item Added Sucsessfuly", HttpStatus.CREATED,itemService.addItem(itemEntity)),HttpStatus.CREATED);
     }
 
