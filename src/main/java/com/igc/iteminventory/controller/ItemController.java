@@ -1,6 +1,7 @@
 package com.igc.iteminventory.controller;
 
 import com.igc.iteminventory.entity.ItemEntity;
+import com.igc.iteminventory.model.ItemModel;
 import com.igc.iteminventory.responses.Responses;
 import com.igc.iteminventory.service.IItemService;
 import jakarta.validation.Valid;
@@ -23,8 +24,8 @@ public class ItemController {
     }
 
     @PostMapping("/additem")
-    public ResponseEntity<?> addItem(@RequestBody @Valid ItemEntity itemEntity) {
-        return new ResponseEntity<>(new Responses("Item Added Sucsessfuly", HttpStatus.CREATED,itemService.addItem(itemEntity)),HttpStatus.CREATED);
+    public ResponseEntity<?> addItem(@RequestBody @Valid ItemModel itemModel) {
+         return new ResponseEntity<>(new Responses("Item Added Sucsessfuly", HttpStatus.CREATED,itemService.addItem(itemModel)),HttpStatus.CREATED);
     }
 
     @GetMapping("/getallitems")
@@ -44,7 +45,7 @@ public class ItemController {
     }
 
     @PutMapping("/updateitembyid/{id}")
-    public ResponseEntity<?> updateItemById(@PathVariable("id") int id, @RequestBody ItemEntity item) {
-        return new ResponseEntity<>(new Responses("Item Updated Successfully",HttpStatus.PROCESSING,itemService.updateItemById(id,item)),HttpStatus.PROCESSING);
+    public ResponseEntity<?> updateItemById(@PathVariable("id") int id, @RequestBody ItemModel itemModel) {
+        return new ResponseEntity<>(new Responses("Item Updated Successfully",HttpStatus.PROCESSING,itemService.updateItemById(id,itemModel)),HttpStatus.PROCESSING);
     }
 }
